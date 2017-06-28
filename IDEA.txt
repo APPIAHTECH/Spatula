@@ -1,0 +1,23 @@
+#Definicion
+  Crear una comunidad de chef , que compartan sus recetas favoritas.
+
+#Caracteristicas Fontend
+  Video de como hacen la comida
+  Definicion y requerimiento de las recetas que se usaran.
+  Busqueda de las recetas.
+  Valorar Video |Puntuacion i comentarios.
+  Categorias
+  Chat en tiempo real.
+  Recomendacions en base categoria
+  Seguir usuario + notificar quando el usuario sube un nuevo contenido
+  busqueda por voz
+  CRUD
+  Estadisticas.
+  Donaciones a los usuarios.
+  Compartir i guardar recetas.
+  Poder elegir diferentess supermercador (los mas cercanos al usuario o proximos) para hacer la compra online o ofline.
+
+#Caracteristicas Bakend
+  Gestion de usuarios y projectos
+  Aprobar video
+  Crear un nuevo video
