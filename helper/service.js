@@ -9,15 +9,17 @@ var env = require(path.resolve('./.env'));
 class Service {
   constructor() {}
 
-  static createToken(user){
+  static createToken(user , expires){
 
+    if(!expires)
+      expires = moment().add(14 , 'days').unix();
     var payload = {
       sub : user._id, //Generate a public id for client
       createdAt : moment().unix(),
-      expires : moment().add(14 , 'days').unix(),
+      expires : expires,
       mail : user.email
     }
-
+    
     return jwt.encode(payload , env.JWT.SECREET_TOKEN);
   }
 
@@ -78,7 +80,11 @@ class Service {
     });
   }
 
-  static comparePassword(){}
+  static comparePassword(password, hashedPassword , callback){
+    bcrypt.compare(password, hashedPassword, function(err, res) {
+      callback(err , res);
+    });
+  }
 }
 
 module.exports = Service;
