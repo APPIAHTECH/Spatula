@@ -65,11 +65,17 @@ class UserController{
 
   static resetPassword(req , res , next){
     var email = req.body.email;
-    UserModel.findOne({ 'email': email }, '_id',function (err, user){
+    UserModel.findOne({ 'email': email }, 'email _id',function (err, user){
       if (err) return console.error(err);
-      var token = Helper.createToken(user , moment().add(60 , 'second').unix());
-      Helper.sendMail(email , 'Restor Password' , `Hello , to restor password please <h2><a href="http://localhost:4200/restorpassword/${token}"> Password Reset Verification Key</a></h2>`);
-      return res.json({toVerifyPasswordRestor : true});
+
+      if(user){
+        var token = Helper.createToken(user , moment().add(60 , 'second').unix());
+        Helper.sendMail(email , 'Restor Password' , `Hello , to restor password please <h2><a href="http://localhost:4200/restorpassword/${token}"> Password Reset Verification Key</a></h2>`);
+        return res.json({toVerifyPasswordRestor : true});
+      }else {
+        return res.json({find : false});
+      }
+
     });
   }
 

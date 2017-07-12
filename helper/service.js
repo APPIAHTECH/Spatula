@@ -11,16 +11,21 @@ class Service {
 
   static createToken(user , expires){
 
-    if(!expires)
-      expires = moment().add(14 , 'days').unix();
-    var payload = {
-      sub : user._id, //Generate a public id for client
-      createdAt : moment().unix(),
-      expires : expires,
-      mail : user.email
+    if(user){
+      if(!expires)
+        expires = moment().add(14 , 'days').unix();
+
+      var payload = {
+        sub : user._id, //Generate a public id for client
+        createdAt : moment().unix(),
+        expires : expires,
+        mail : user.email
+      }
+
+      return jwt.encode(payload , env.JWT.SECREET_TOKEN);
+    }else {
+      return null;
     }
-    
-    return jwt.encode(payload , env.JWT.SECREET_TOKEN);
   }
 
   static unDecodeToken(token , callback){
